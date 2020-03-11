@@ -5,12 +5,67 @@
 1. ##### JDK中常见的几个设计模式。
 
    - 单例模式：保证被创建一次，节省系统开销。
-   - 工厂模式：解耦代码。
+
+     > java.lang.Runtime#getRuntime() 
+     >
+     >  Runtime类封装了运行时的环境。每个 Java 应用程序都有一个 Runtime 类实例，使应用程序能够与其运行的环境相连接。
+     > 一般不能实例化一个Runtime对象，应用程序也不能创建自己的 Runtime 类实例，但可以通过 getRuntime 方法获取当前Runtime运行时对象的引用。
+     > 一旦得到了一个当前的Runtime对象的引用，就可以调用Runtime对象的方法去控制Java虚拟机的状态和行为。 
+
+   - 工厂模式：解耦代码, 创建对象而不将实例化逻辑暴露给客户端，并通过公共接口引用新创建的对象。 。
+
+     > java.lang.Object#toString() (在所有子类中重写) 
+     >
+     > java.lang.Class#newInstance() 
+     >
+     > java.lang.Integer#valueOf(String) 
+     >
+     > java.lang.Class#forName() 
+
+   - 抽象工厂：提供用于创建一系列相关对象的接口，而无需显式指定其类。  
+
+     > java.sql.DriverManager#getConnection() 
+     >
+     >  java.util.Arrays#asList() 
+     >
+     >  java.sql.Statement#executeQuery() 
+     >
+     >  java.sql.Connection#createStatement() 
+
+   - 原型模式：复制对象，深复制浅复制。
+
+     > Object.clone
+     >
+     > Cloneable 
+
+   - 适配器模式：使不兼容的接口相容
+
+     >java.io.InputStreamReader(InputStream)
+     >
+     >java.io.OutputStreamWriter(OutputStream) 
+
+   - 代理模式：透明的调用被代理对象，增加被代理类的功能，无需知道实现细节。
+
+     > 动态代理
+
    - 观察者模式：定义了对象之间的一对多的依赖，这样一来，当一个对象改变时，他的所有的依赖者都会收到通知并自动更新。
+
+     >java.util.Observer,Observable
+     >Swing中的Listener 
+
    - 外观模式：提供一个统一的接口，用来访问子系统中的一群接口，外观定义了一个高层的接口，让子系统更容易使用。
+
+     > java.util.logging包 
+
    - 模板方法模式：定义了一个算法骨架，而将一些步骤延迟到子类中，模板方法可以使得子类可以在不改变算法结构的情况下，重新定义算法的步骤。
-   - 状态模式：允许对象在内部状态改变时改变他的行为，对象看起来好像修改了它的类。
+
+     > ThreadPoolExecutor.Worker 
+
    - 装饰器模式：动态的扩展一个类的功能。被用于多个Java类中。
+
+     >java.io包
+     >
+     >java.util.Collections#synchronizedList(List) 
 
 2. ##### 什么是设计模式，你是否在你的代码里使用过任何设计模式？
 
@@ -42,8 +97,8 @@
 
 9. ##### 在Java语言中，什么时候重载，什么时候重写？
 
-   - 重载：发生在方法上，不同的输入做同一件事。。
-   - 重写： 体现在继承关系上，子类把父类本身有的方法重新写了一遍
+   - 重载：发生在方法上，不同的输入做同一件事。
+   - 重写： 体现在继承关系上，子类把父类本身有的方法重新写了一遍。
 
 10. ##### 请说明什么情况下更倾向于使用抽象类而不是接口？
 
