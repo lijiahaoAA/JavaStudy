@@ -6,7 +6,7 @@
 
    - throw用于方法内部，throws用于方法声明上。
 
-   - throw后跟异常对象，thros后跟异常类型。
+   - throw后跟异常对象，throws后跟异常类型。
 
    - throw后只能跟一个异常对象，throws后可以一次声明多种异常类型。
 
