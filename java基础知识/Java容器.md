@@ -4,7 +4,7 @@
 
 1. ##### Java容器有哪些？
 
-   Java容器分为两类collection和map
+   Java容器分为两类Collection和Map
 
    - Collection：List，ArrayList，LinkedList，Set，HashSet，LinkedHashSet，TreeSet，Stack，Vector
    - Map：HashMap，LinkedHashMap，TreeMap，ConcurrentHashMap，Hashtable
@@ -34,7 +34,7 @@
 
 6. ##### HashMap的实现原理。
 
-   HadhMap是基于Hash短发实现的，我们通过put(key，value)存储，get(key)来获取，key值不允许有重复。当传入key时，HashMap会根据key.hashCode()计算出hash值，根据哈希值将value保存在bucket中。若计算出的hash值相同时，我们称之为哈希冲突，HashMap的做法是用链表和红黑树存储相同hash值的value，冲突个数比较少时，使用链表，否则使用红黑树。
+   HadhMap是基于Hash实现的，我们通过put(key，value)存储，get(key)来获取，key值不允许有重复。当传入key时，HashMap会根据key.hashCode()计算出hash值，根据哈希值将value保存在bucket中。若计算出的hash值相同时，我们称之为哈希冲突，HashMap的做法是用链表和红黑树存储相同hash值的value，冲突个数比较少时，使用链表，否则使用红黑树。
 
 7. ##### HashSet的实现原理。
 
@@ -58,7 +58,7 @@
 
 11. ##### Array和ArrayList的区别
 
-    - Array可以存储基本数据类型和独享，ArrayList只能存储对象。
+    - Array可以存储基本数据类型和对象，ArrayList只能存储对象。
     - Array是指定固定大小的，而ArrayList是自动扩容的。
     - Array的内置方法没有ArrayList多，addAll，removeAll，iteration等方法只有ArrayList有。
 
@@ -86,7 +86,7 @@
 
 15. ##### 迭代器Iterator是什么？
 
-    Iterator接口提供遍历任何Collection的接口。我们可以从一个Collection中使用迭代器方法来获取迭代器实力。迭代器取代了java集合框架中的Enumeration，迭代器允许调用者在迭代过程中移除元素。
+    Iterator接口提供遍历任何Collection的接口。我们可以从一个Collection中使用迭代器方法来获取迭代器实例。迭代器取代了java集合框架中的Enumeration，迭代器允许调用者在迭代过程中移除元素。
 
 16. ##### Iterator和ListIterator有什么区别？
 
@@ -100,7 +100,7 @@
 
 17. ##### 怎么确保一个集合不能被修改？
 
-    可以使用 Collections. 
+    可以使用 Collections。
 
     unmodifiableCollection(Collection c) 方法来创建一个只读集合，这样改变集合的任何操作都会抛出 Java. lang. UnsupportedOperationException 异常。 
 
