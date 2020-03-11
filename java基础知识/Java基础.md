@@ -63,8 +63,8 @@
     - replace：字符串替换。
     - trim：去除字符转两端空白。
     - spilt：分割字符串。
-    - getBytes：返回字符串长度。
-    - length：返回字符串长度。
+    - getBytes：返回字符串字节长度，一个中文算两个字节。
+    - length：返回字符串字符个数，一个中文算一个字符。
     - toLowerCase：转换小写。
     - toUpperCase：转换大写。
     - substring：截取字符串。
@@ -102,7 +102,7 @@
 
     - BIO：Block IO同步阻塞式IO，即平常使用的传统IO，模式简单使用方便，但并发处理能力低。
     - NIO：Non IO同步非阻塞IO，客户端和服务器通过Channel通道通讯，实现了多路复用，基于时事件驱动思想，解决BIO的并发问题。
-    - AIO：Asychronous IO异步非阻塞IO。异步IO的操作基于事件和回调机制。
+    - AIO：Asynchronous IO异步非阻塞IO。异步IO的操作基于事件和回调机制。
 
 17. ##### .Files的常用方法都有哪些？
 
