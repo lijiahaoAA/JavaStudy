@@ -84,11 +84,11 @@
 
 5. ##### 动态代理的使用场景。
 
-   Java中实现动态的方式：JDK中的动态代理和Java类库cglib.
+   Java中实现动态的方式：JDK中的动态代理和Java类库`cglib`
 
    - Spring 中AOP就是采用动态代理的机制来实现的面向切面。
    - 统一的日志输出。
-   - 统计每个api的请求耗时。
+   - 统计每个API的请求耗时。
 
 6. ##### 怎么实现动态代理？
 
@@ -175,7 +175,7 @@
              Intermediary intermediary = new Intermediary(rent);
              //loader: 用哪个类加载器去加载代理对象
              //interfaces:动态代理类需要实现的接口
-             //第三个参数:动态代理方法在执行时，会调用h里面的invoke方法去执行
+             //第三个参数:动态代理方法在执行时，会调用该类里面的invoke方法去执行
              Rent rentProxy = (Rent) Proxy.newProxyInstance(rent.getClass().getClassLoader(), rent.getClass().getInterfaces(), intermediary);
              rentProxy.rent();
          }
@@ -183,7 +183,7 @@
      
      ~~~
 
-   - 使用类库Cglib
+   - 使用类库`cglib`
 
      ~~~java
      public class Landlord {
@@ -228,3 +228,4 @@
      ~~~
 
      
+
