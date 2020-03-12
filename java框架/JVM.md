@@ -4,13 +4,17 @@
 
 1. ##### 说一下JVM的主要组成部分？及其作用？
 
-   ![](https://img-blog.csdn.net/20171207192926318?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdzMwNDU4NzI4MTc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+   [可参考]( https://www.cnblogs.com/zwbg/p/6194470.html )
+
+   ![](https://images2015.cnblogs.com/blog/994276/201612/994276-20161218141127183-1877010567.png)
+
+   ![](https://images2015.cnblogs.com/blog/994276/201612/994276-20161218153832964-1285100330.png)	
 
    - class loader（类加载器）：加载类文件到内存。只负责加载，不负责执行。
 
-   - exectution engine（解释器/执行引擎）：负责解释命令，交由操作系统执行。
+   - exectution engine（解释器/执行引擎）：负责解释命令，交由操作系统执行，是jvm的核心。
 
-   - native interface（本地接口）：融合不同的语言为java所用。
+   - native interface（本地方法栈）：融合不同的语言为java所用。
 
    - Runtimedata area（运行时数据区）：程序被加载到这里，才开始执行。
 
@@ -88,19 +92,19 @@
 
 10. ##### 说一下JVM有哪些垃圾回收器？
 
-    · Serial：最早的单线程串行垃圾回收器。
+   · Serial：最早的单线程串行垃圾回收器。
 
-    · Serial Old：Serial 垃圾回收器的老年版本，同样也是单线程的，可以作为 CMS 垃圾回收器的备选预案。
+   · Serial Old：Serial 垃圾回收器的老年版本，同样也是单线程的，可以作为 CMS 垃圾回收器的备选预案。
 
-    · ParNew：是 Serial 的多线程版本。
+   · ParNew：是 Serial 的多线程版本。
 
-    · Parallel 和 ParNew 收集器类似是多线程的，但 Parallel 是吞吐量优先的收集器，可以牺牲等待时间换取系统的吞吐量。
+   · Parallel 和 ParNew 收集器类似是多线程的，但 Parallel 是吞吐量优先的收集器，可以牺牲等待时间换取系统的吞吐量。
 
-    · Parallel Old 是 Parallel 老生代版本，Parallel 使用的是复制的内存回收算法，Parallel Old 使用的是标记-整理的内存回收算法。
+   · Parallel Old 是 Parallel 老生代版本，Parallel 使用的是复制的内存回收算法，Parallel Old 使用的是标记-整理的内存回收算法。
 
-    · CMS：一种以获得最短停顿时间为目标的收集器，非常适用 B/S 系统。
+   · CMS：一种以获得最短停顿时间为目标的收集器，非常适用 B/S 系统。
 
-    · G1：一种兼顾吞吐量和停顿时间的 GC 实现，是 JDK 9 以后的默认 GC 选项。
+   · G1：一种兼顾吞吐量和停顿时间的 GC 实现，是 JDK 9 以后的默认 GC 选项。
 
 11. ##### 详细介绍下CMS垃圾回收器？
 
@@ -147,7 +151,7 @@
 
     - -Xms
 
-    s为strating，表示堆内存起始大小
+    s为starting，表示堆内存起始大小
 
     - -Xmx
 
