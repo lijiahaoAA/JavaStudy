@@ -8,7 +8,7 @@
 
    AMQP，即Advanced Message Queuing Protocol，高级消息队列协议，是应用层协议的一个开放标准，为面向消息的[中间件](http://www.diggerplus.org/archives/tag/中间件)设计。消息中间件主要用于组件之间的解耦，消息的发送者无需知道消息使用者的存在，反之亦然。
    AMQP的主要特征是面向消息、队列、路由（包括点对点和发布/订阅）、可靠性、安全。
-   RabbitMQ是一个开源的AMQP实现，服务器端用Erlang语言编写，支持多种客户端，如：Python、Ruby、.NET、Java、JMS、C、PHP、ActionScript、XMPP、STOMP等，支持AJAX。用于在分布式系统中存储转发消息，在易用性、扩展性、高可用性等方面表现不俗。 
+   RabbitMQ是一个开源的AMQP实现，服务器端用Erlang语言编写，支持多种客户端，如：Python、Ruby、.NET、Java、JMS、C、PHP、ActionScript、XMPP、STOMP等，支持AJAX。**用于在分布式系统中存储转发消息，在易用性、扩展性、高可用性等方面表现不俗。** 
 
 2. ##### RabbitMQ的使用场景有那些？
 
@@ -34,9 +34,9 @@
    - RoutingKey：路由键，用于把生产者的数据分配到交换机上。
    - BindingKey：绑定键，用于把交换机的消息绑定到队列上。
 
-5. ###### RabbitMQ中vhost的作用是什么？==不是特别理解==
+5. ###### RabbitMQ中vhost的作用是什么？
 
-   host本质上是一个mini版的RabbitMQ服务器，拥有自己的队列、绑定、交换器和权限控制；
+   vhost本质上是一个mini版的RabbitMQ服务器，拥有自己的队列、绑定、交换器和权限控制；
 
    vhost通过在各个实例间提供逻辑上分离，允许你为不同应用程序安全保密地运行数据；
 
@@ -86,7 +86,7 @@
 
 10. ##### RabbitMQ持久化有什么缺点?
 
-    降低了服务器的吞吐量，引用的是磁盘而不是内存存储，从而降低了吞吐量。可使用ssd硬盘来缓解吞吐量的问题。
+    降低了服务器的吞吐量，引用的是磁盘而不是内存存储。可使用ssd硬盘来缓解吞吐量的问题。
 
 11. ##### RabbitMQ有几种广播类型？
 
