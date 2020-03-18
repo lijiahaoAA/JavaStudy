@@ -55,14 +55,21 @@
 7. ##### sleep()和wait()的区别？
 
    - sleep来自于Thread，wait来自于Object类。
-   - sleep不释放锁，wait释放锁。
+   - **sleep不释放锁，wait释放锁。**
    - sleep到时间会自动恢复，wait可以使用`notify()`或者`notifyAll()`唤醒。
+   - sleep()方法通常用于暂停执行，wait()方法通常用于线程间交互/通信。
 
 8. ##### 线程的run和start两个方法有什么区别？
 
    start() 方法用于启动线程，run() 方法用于执行线程的运行时代码。run() 可以重复调用，而 start() 只能调用一次。 
 
-9. ##### 创建线程池的方式
+9. ##### 为什么我们调用 start() 方法时会执行 run() 方法，为什么不能直接执行 run() 方法？
+
+   new一个 Thread ，线程就会进入新建状态；调用start()，会启动一个线程并使线程进入了就绪状态，当分配到时间片就可以开始运行了。start()会执行线程的相应准备工作，然后自动执行run()方法的内容，这是真正的多线程工作。而直接进行run()的调用，会把run()方法当作一个main()线程下的普通方法去执行，也就是在运行在主线程中，代码在程序中是顺序执行的，所以不会有解决耗时操作的问题。
+
+   只有子线程开始了，才会有异步的效果。
+
+10. ##### 创建线程池的方式
 
    线程池创建有七种方式，最核心的是最后一种：
 
@@ -74,7 +81,7 @@
    - `newWorkStealingPool(int parallelism)`：这是一个经常被人忽略的线程池，Java 8 才加入这个创建方法，其内部会构建`ForkJoinPool`，利用Work-Stealing算法，并行地处理任务，不保证处理顺序；
    - `ThreadPoolExecutor()`：是最原始的线程池创建，上面1-3创建方式都是对`ThreadPoolExecutor`的封装。
 
-10. ##### 线程池有哪些状态？
+11. ##### 线程池有哪些状态？
 
     - RUNNING：正常状态，接受新任务，处理等待队列中的任务。
 
@@ -86,12 +93,12 @@
 
       [钩子方法]( https://www.cnblogs.com/yanlong300/p/8446261.html )
 
-11. ##### 线程池中的submit()和execute()有什么区别？
+12. ##### 线程池中的submit()和execute()有什么区别？
 
     - execute()：只能执行 Runnable 类型的任务。
     - submit()：可以执行 Runnable 和 Callable 类型的任务。
 
-12. ##### 在Java程序中如何保证多线程的运行安全？
+13. ##### 在Java程序中如何保证多线程的运行安全？
 
     - 使用安全类，`java.util.concurrent`下的类。
     - 使用自动锁synchronized。
@@ -110,11 +117,15 @@
     }
        ~~~
 
-13. ##### 说一下synchronized底层实现原理。
+14. ##### synchronized解决了什么问题?
 
-    synchronized是由一对`monitorenter/monitorexit`指令实现的，monitor(监视器锁)对象是同步的基本实现单元。
+    解决的是多个线程之间访问资源的同步性问题，synchronized关键字可以保证它修饰的方法或者代码块在任意时刻只能有一个线程执行。
 
-14. ##### synchronized和volatile的区别是什么？
+15. ##### 说一下synchronized底层实现原理。
+
+    synchronized是由一对`monitorenter/monitorexit`指令实现的，monitor(监视器锁)对象是同步的基本实现单元。而监视器锁依赖于底层操作系统的互斥锁实现，Java线程是映射到操作系统的原生线程之上的。如果要挂起或者唤醒一个线程，都需要操作系统帮忙实现。而操作系统实现线程之间的切换需要从用户态转到内核态，这就需要相对较长的时间，所以早期的synchronized效率低下。JDK1.6对synchronized做了优化，如自旋锁，偏向锁，轻量级锁。
+
+16. ##### synchronized和volatile的区别是什么？
 
     - volatile是变量修饰符，synchronized是修饰类，方法，代码段。
     - volatile仅能实现变量的修改可见性（`cpu`高速缓存向主存的同步），不能保证原子性；而synchronized可以保证变量的可见性和原子性。
@@ -122,19 +133,19 @@
 
     [volatile关键字]( https://www.cnblogs.com/dolphin0520/p/3920373.html )
 
-15. ##### synchronized和Lock有什么区别？
+17. ##### synchronized和Lock有什么区别？
 
     - Lock只能给代码块加锁，而synchronized可以给类，方法，代码段加锁。
     - synchronized是自动锁，不需要手动获取和释放锁，使用简单，发生异常时自动释放锁，不会造成死锁。Lock锁是手动锁，需要自己加锁和释放锁，如果使用不当没有unlock()去释放锁就会造成死锁。
     - 通过Lock可以知道有没有成功获取锁，synchronized不可以。
 
-16. ##### synchronized和`ReentrantLock`有什么区别？
+18. ##### synchronized和`ReentrantLock`有什么区别？
 
     - `ReentrantLock`使用灵活(实现了Lock接口)，但是必须有释放锁的配合动作。
     - `ReentrantLock`也是手动锁，synchronized是自动锁。
     - `ReentrantLock`只能给代码块加锁，而synchronized可以给类，方法，代码段加锁。
 
-17. ##### 多线程中synchronized锁升级的原理是什么？
+19. ##### 多线程中synchronized锁升级的原理是什么？
 
     **synchronized 锁升级原理**：在锁对象的对象头里面有一个 `threadid` 字段，在第一次访问的时候` threadid` 为空，`jvm `让其持有偏向锁，并将 `threadid` 设置为其线程 id，再次进入的时候会先判断 `threadid` 是否与其线程 id 一致，如果一致则可以直接使用此对象，如果不一致，则升级偏向锁为轻量级锁，通过自旋循环一定次数来获取锁，执行一定次数之后，如果还没有正常获取到要使用的对象，此时就会把锁从轻量级升级为重量级锁，此过程就构成了 synchronized 锁的升级。
 
@@ -142,21 +153,36 @@
 
     [简单阐述]( https://www.cnblogs.com/ConstXiong/p/11687975.html )
 
-18. ##### 说一下atomic的原理。
+20. ##### 说一下atomic的原理。
 
     atomic主要利用CAS（Compare And Swap）乐观锁（不会进行内核态的操作）和volatile和native方法来保证原子性，从而避免synchronized的高开销（用户态和内核态的切换），执行效率大为提升。
 
-19. ##### 什么是死锁？
+21. ##### 什么是死锁？
 
     线程A持有独占锁a，并尝试获取独占锁b的同时，线程B持有独占锁b，并尝试获取独占锁a，会发生AB两个线程都在等待对方释放锁，而发生阻塞的现象，称之为死锁。
 
-20. ##### 怎么防止死锁？
+22. ##### 产生死锁必须具备的条件？
+
+    - 互斥条件：该资源任意时刻只由一个线程占用。
+    - 请求与保持条件：一个进程因请求资源而阻塞时，对已获得的资源保持不放。
+    - 不剥夺条件：线程以获得的资源在没有使用完之前不能被其他线程强行剥夺，只能自己使用完释放。
+    - 循环等待条件：若干进程循环等待资源。
+
+23. ##### 怎么防止死锁？
+
+    对必须的条件只要破坏一个就行（互斥破不了，单个CPU一次只能处理一个线程，分配时间片）
+
+    - 一次性申请所有资源（破坏请求与保持条件）。
+    - 占用部分资源的线程申请其他资源时，获取不到，可以主动释放自己占有的资源（破坏不剥夺条件）。
+    - 按某一顺序申请资源，释放资源则反序释放（破坏循环等待条件）。
+
+    **具体做法：**
 
     - 对锁设置超时时间，超时就退出竞争防止死锁。
     - 尽量使用`java.util.concurrent`并发类代替手写锁。
     - 尽量降低锁的使用粒度，尽量不要几个功能使用同一把锁。
     - 尽量减少同步的代码块。
 
-21. ##### `ThreadLocal`是什么？有哪些使用场景？
+24. ##### `ThreadLocal`是什么？有哪些使用场景？
 
     `ThreadLocal` 为每个使用该变量的线程提供独立的变量副本，所以每一个线程都可以独立地改变自己的副本，而不会影响其它线程所对应的副本。 
