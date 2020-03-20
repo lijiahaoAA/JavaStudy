@@ -1,5 +1,9 @@
 # JavaStudy
-> 主要参考地： https://www.zhihu.com/question/333684160/answer/920803810?utm_source=wechat_session&utm_medium=social&utm_oi=798483813574529024&utm_content=pu 
+> 主要参考地： 
+>
+> [知乎](https://www.zhihu.com/question/333684160/answer/920803810?utm_source=wechat_session&utm_medium=social&utm_oi=798483813574529024&utm_content=pu )
+>
+> [Github-Guide哥]( https://github.com/Snailclimb/JavaGuide )		
 
 #### 目录
 
@@ -47,4 +51,4 @@
 
 ***
 
-#### 所有内容均自己理解后重新编辑了一次，如有不对，希望大家纠正。
+#### 希望大家多多纠错！！
