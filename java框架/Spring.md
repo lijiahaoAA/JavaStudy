@@ -21,39 +21,45 @@
 
    这些系统性的编程工作都可以独立编码实现，然后通过AOP技术切入进系统即可。从而达到了 将不同的关注点分离出来的效果。
 
-3. ##### 解释一下什么是IOC？
+3. ##### Spring AOP和AspectJ AOP有什么区别？
+
+   - Spring AOP属于运行时增强，AspectJ AOP是编译时增强。
+   - Spring AOP基于动态代理，AspectJ基于字节码操作。
+   - Spring AOP集成了AspectJ，切面太多时，选择AspectJ，速度快。
+
+4. ##### 解释一下什么是IOC？
 
    IOC：控制反转。是spring的核心，对于spring框架来说，就是由spring来负责去控制对象的生命周期和对象间的关系。
 
    通俗地讲：就是把原本你自己制造，使用的对象，现在交由别人制造，而通过构造函数，setter方法或方法（这里指使用这个对象的方法）参数的方式传给你，由你使用。 
 
-4. ##### Spring有哪些主要模块？
+5. ##### Spring有哪些主要模块？
 
    Spring Core，ORM，DAO，MVC，WEB，Context，AOP
 
    ![模块图](https://img2018.cnblogs.com/blog/1704520/201906/1704520-20190624204106525-880966760.gif)
 
    - Spring Core：Core是Spring的核心类库，Spring的所有功能都依赖于该库，Core主要实现IOC功能。Spring的所有功能都是借助IOC实现的。
-   - AOP：AOP模块是Spring的AOP库，提供了AOP（拦截器）机制，并提供常用的拦截器，供用户自定义和配置。
+     - AOP：AOP模块是Spring的AOP库，提供了AOP（拦截器）机制，并提供常用的拦截器，供用户自定义和配置。基于动态代理，代理对象实现了接口，Spring AOP使用JDK Proxy去创建代理对象，对于没有实现接口的对象，无法使用JDK Proxy代理，Spring AOP会使用Cglib生成一个被代理对象的子类。
    - ORM：提供对常用的ORM框架的管理和辅助支持。例如Hibernate，ibtas等框架，Spring本身不对ORM进行实现，仅对常见的ORM框架进行封装。
    - DAO模块：Spring提供对JDBC的支持，对JDBC进行封装，允许JDBC使用Spring资源，并能统一管理JDBC事务，并不对JDBC实现。
    - WEB模块：WEB模块提供对常见框架Struts，JSF的支持。Spring能够管理这些框架，将Spring的资源注入给框架，也能在这些框架的前后插入拦截器。
    - Context模块：Context模块提供框架式的Bean访问方式，其他程序可以通过Context访问Spring的Bean资源，相当于资源注入。
    - MVC模块：WEB MVC模块为Spring提供了一套轻量级的MVC实现，实际开发中，我们既可以使用Struts，也可以使用Spring自己的MVC框架。
 
-5. ##### Filter过滤器，Interceptor拦截器，Spring AOP拦截器的区别？
+6. ##### Filter过滤器，Interceptor拦截器，Spring AOP拦截器的区别？
 
    - Filter过滤器：拦截Web访问url地址。
    - Interceptor：拦截以.action结尾的url，拦截Action的访问。
    - Spring AOP：只能拦截Spring管理Bean的访问（业务层Service）。
 
-6. ##### Spring常用的注入方式？
+7. ##### Spring常用的注入方式？
 
    - setter属性注入
    - 构造方法注入
    - 注解注入
 
-7. ##### Spring中bean是线程安全的么？
+8. ##### Spring中bean是线程安全的么？
 
    Spring容器中的Bean是否线程安全，容器本身并没有提供Bean的线程安全策略，因此可以说**Spring容器中的Bean本身不具备线程安全的特性**，但是具体还是要结合具体scope的Bean去研究。
 
@@ -68,16 +74,16 @@
    - 有状态就是有数据存储功能。
    - 无状态就是不会保存数据。
 
-8. ##### Spring支持几种bean的作用域？
+9. ##### Spring支持几种bean的作用域？
 
    - singleton：单例模式，Spring IOC容器中只存在一个Bean实例，Bean以单例模式存在。系统默认值。
-   - prototype：每次从容器调用bean时都会创建一个新的实例，即每次getBean()相当于执行new Bean()操作。
+   - prototype：每次请求（容器调用bean）时都会创建一个新的实例，即每次getBean()相当于执行new Bean()操作。
    - Web下的bean作用域：
      - request：每次http请求都会创建一个bean。
      - session：同一个http session共享一个bean实例。
      - global-session：提供一个全局的http session。
 
-9. ##### Spring自动装配bean有哪些方式？
+10. ##### Spring自动装配bean有哪些方式？
 
    - no：默认值，表示自动装配，应使用显式bean引用进行装配。
    - byName：根据bean的名称注入对象依赖项。
@@ -85,12 +91,28 @@
    - 构造函数：通过构造函数注入依赖项。
    - autodetect：容器首先通过构造函数使用autowired装配，如果不能，则通过byType自动装配。
 
-10. ##### Spring事务实现的方式有哪些？
+11. ##### Spring事务实现的方式有哪些？
 
     - 声明式事务：基于xml配置文件或者基于注解。
     - 硬编码实现。
 
-11. ##### 说一下Spring的事务隔离。
+12. ##### 说一下什么是事务传播行为？
+
+    用来描述某一个事务传播行为修饰的方法被嵌套进另一个方法时事务如何传播。
+
+13. ##### Srring的七种事务传播行为？
+
+    | 事务传播行为              | 说明                                                         |
+    | ------------------------- | ------------------------------------------------------------ |
+    | PROPAGATION_REQUIRED      | 如果当前没有事务，就新建一个事务，如果已经存在一个事务中，加入到这个事务中。这是最常见的选择。 |
+    | PROPAGATION_SUPPORTS      | 支持当前事务，如果当前没有事务，就以非事务方式执行。         |
+    | PROPAGATION_MANDATORY     | 使用当前的事务，如果当前没有事务，就抛出异常。               |
+    | PROPAGATION_REQUIRES_NEW  | 新建事务，如果当前存在事务，把当前事务挂起。                 |
+    | PROPAGATION_NOT_SUPPORTED | 以非事务方式执行操作，如果当前存在事务，就把当前事务挂起。   |
+    | PROPAGATION_NEVER         | 以非事务方式执行，如果当前存在事务，则抛出异常。             |
+    | PROPAGATION_NESTED        | 如果当前存在事务，则在嵌套事务内执行。如果当前没有事务，则执行与PROPAGATION_REQUIRED类似的操作。 |
+
+14. ##### 说一下Spring的事务隔离。
 
     spring有五大隔离界别，默认值为ISOLATION_DEFAULT.
 
@@ -100,7 +122,7 @@
     - ISOLATION REPEATABLE READ：可重复读，保证多次读取同一个数据时，其值都和事务刚开始时的内容是一致的，禁止读取到别的事务未提交的数据（会造成幻读）。
     - ISOLATION_SERIALIZABLE：序列化，代价最高最可靠的隔离级别，该级别能防止脏读、不可重复读、幻读。
 
-12. ##### 脏读，不可重复读，幻读是什么？
+15. ##### 脏读，不可重复读，幻读是什么？
 
     - 脏读：表示一个事务能够读取另一个事务中还未提交的数据。比如，某个事务尝试插入记录 A，此时该事务还未提交，然后另一个事务尝试读取到了记录 A。 
     - 不可重复读：不可重复读是指在事务1内，读取了一个数据，事务1还没有结束时，事务2也访问了这个数据，修改了这个数据，并提交。紧接着，事务1又读这个数据。由于事务2的修改，那么事务1两次读到的的数据可能是不一样的，因此称为是不可重复读。 
