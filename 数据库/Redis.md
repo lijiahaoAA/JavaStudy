@@ -84,11 +84,10 @@
 
    - string字符串（k-v）
    - list列表
-   - list列表
    - hash字典
    - set集合
    - zset有序集合
-
+   
 11. ##### Redis支持的Java客户端有哪些？
 
     Redisson，jedis，lettuce。。。

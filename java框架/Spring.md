@@ -40,7 +40,7 @@
    ![模块图](https://img2018.cnblogs.com/blog/1704520/201906/1704520-20190624204106525-880966760.gif)
 
    - Spring Core：Core是Spring的核心类库，Spring的所有功能都依赖于该库，Core主要实现IOC功能。Spring的所有功能都是借助IOC实现的。
-     - AOP：AOP模块是Spring的AOP库，提供了AOP（拦截器）机制，并提供常用的拦截器，供用户自定义和配置。基于动态代理，代理对象实现了接口，Spring AOP使用JDK Proxy去创建代理对象，对于没有实现接口的对象，无法使用JDK Proxy代理，Spring AOP会使用Cglib生成一个被代理对象的子类。
+   - AOP：AOP模块是Spring的AOP库，提供了AOP（拦截器）机制，并提供常用的拦截器，供用户自定义和配置。基于动态代理，代理对象实现了接口，Spring AOP使用JDK Proxy去创建代理对象，对于没有实现接口的对象，无法使用JDK Proxy代理，Spring AOP会使用Cglib生成一个被代理对象的子类。
    - ORM：提供对常用的ORM框架的管理和辅助支持。例如Hibernate，ibtas等框架，Spring本身不对ORM进行实现，仅对常见的ORM框架进行封装。
    - DAO模块：Spring提供对JDBC的支持，对JDBC进行封装，允许JDBC使用Spring资源，并能统一管理JDBC事务，并不对JDBC实现。
    - WEB模块：WEB模块提供对常见框架Struts，JSF的支持。Spring能够管理这些框架，将Spring的资源注入给框架，也能在这些框架的前后插入拦截器。
@@ -89,7 +89,7 @@
    - byName：根据bean的名称注入对象依赖项。
    - byType：根据类型注入对象依赖项。
    - 构造函数：通过构造函数注入依赖项。
-   - autodetect：容器首先通过构造函数使用autowired装配，如果不能，则通过byType自动装配。
+   - autodetect：容器首先通过构造函数使用@Autowired装配，如果不能，则通过byType自动装配。
 
 11. ##### Spring事务实现的方式有哪些？
 
