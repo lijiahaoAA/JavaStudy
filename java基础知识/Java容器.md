@@ -9,6 +9,8 @@
    - Collection：List，ArrayList，LinkedList，Set，HashSet，LinkedHashSet，TreeSet，Stack，Vector
    - Map：HashMap，LinkedHashMap，TreeMap，ConcurrentHashMap，Hashtable
 
+    ![img](https://uploadfiles.nowcoder.com/images/20200215/1034884_1581738199162_50125D538C24748FCB1032CB38EEE0A9) 
+
 2. ##### Collection和Collections有什么区别？
 
    - Collection是一个集合接口，提供了对集合对象进行基本操作的通用接口方法，所有集合都是它的子类，List，Set...
@@ -194,11 +196,15 @@
 
      Iterator 的特点是更加安全，因为它可以确保，在当前遍历的集合元素被更改的时候，就会抛出 ConcurrentModificationException 异常。 
 
-23. ##### 迭代器Iterator是什么？
+23. ##### 说说快速失败（fail-fast）和安全失败的区别（fail-safe）？
+
+    Iterator的安全失败是基于对底层集合做拷贝，因此，它不受源集合上修改的影响。java.util包下面的所有的集合类都是快速失败的，而java.util.concurrent包下面的所有的类都是安全失败的。快速失败的迭代器会抛出ConcurrentModificationException异常，而安全失败的迭代器永远不会抛出这样的异常。 
+
+24. ##### 迭代器Iterator是什么？
 
     Iterator接口提供遍历任何Collection的接口。我们可以从一个Collection中使用迭代器方法来获取迭代器实例。迭代器取代了java集合框架中的Enumeration，迭代器允许调用者在迭代过程中移除元素。
 
-24. ##### Iterator和ListIterator有什么区别？
+25. ##### Iterator和ListIterator有什么区别？
 
     - Iterator可以遍历Set和List集合，而ListIterator只能遍历List。
     - Iterator 只能单向遍历，而 ListIterator 可以双向遍历（向前/后遍历） 。
@@ -208,7 +214,7 @@
     public interface ListIterator<E> extends Iterator<E> 
     ~~~
 
-25. ##### 怎么确保一个集合不能被修改？
+26. ##### 怎么确保一个集合不能被修改？
 
     可以使用 Collections。
 
@@ -222,7 +228,7 @@
     System. out. println(list. size());
     ~~~
 
-18. ##### Arrays工具类的常见操作
+27. ##### Arrays工具类的常见操作
 
     >1. 排序 : `sort()`
     >2. 查找 : `binarySearch()`
@@ -232,7 +238,7 @@
     >6. 转字符串 : `toString()`
     >7. 复制: `copyOf()`
 
-19. ##### Collections工具类的常见操作
+28. ##### Collections工具类的常见操作
 
     ```
     void reverse(List list)//反转
@@ -243,11 +249,24 @@
     void rotate(List list, int distance)//旋转。当distance为正数时，将list后distance个元素整体移到前面。当distance为负数时，将 list的前distance个元素整体移到后面。
     ```
 
-20. ##### 如何选用集合?
+29. ##### 如何选用集合?
 
     主要根据集合的特点来选。
 
     需要根据键值获取元素值就选用Map接口下面的的集合，需要排序时选择TreeMap，不需要排序时选择HashMap，需要线程安全就选择ConcurrentHashMap。
 
     只需要存放元素值时，就选择Collection接口的集合，需要元素唯一时选择实现Set接口的集合如HashSet，TreeSet，不需要实现就选择List接口的比如ArrayList或LinkedList。
+
+30. ##### 简单说下红黑树的特点？
+
+    - 每个节点要么是红色，要么是黑色。
+    - 红黑树因为是排序插入的，可以按照键的值的大小有序输出。 
+
+    - 根节点永远是黑色的。
+
+    - 所有的叶节点都是空节点（即 null），并且是黑色的。
+
+    - 每个红色节点的两个子节点都是黑色。（从每个叶子到根的路径上不会有两个连续的红色节点）
+
+    - 从任一节点到其子树中每个叶子节点的路径都包含相同数量的黑色节点。
 
