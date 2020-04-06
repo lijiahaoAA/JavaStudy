@@ -227,8 +227,9 @@
 
 31. ##### BIO、NIO、AIO 有什么区别？
 
-    - BIO：Block IO同步阻塞式IO，即平常使用的传统IO，模式简单使用方便，但并发处理能力低。
+    - `BIO`：Block IO同步阻塞式IO，即平常使用的传统IO，模式简单使用方便，但并发处理能力低。
 
-    - NIO：Non IO同步非阻塞IO，客户端和服务器通过Channel通道通讯，实现了多路复用，基于时事件驱动思想，解决BIO的并发问题。
+    - `NIO`：Non IO同步非阻塞IO，客户端和服务器通过Channel通道通讯，实现了多路复用，基于事件驱动思想，解决BIO的并发问题。
 
-    - AIO：Asynchronous IO异步非阻塞IO。异步IO的操作基于事件和回调机制。
+    - `AIO`：Asynchronous IO异步非阻塞IO。异步IO的操作基于事件和回调机制。
+
